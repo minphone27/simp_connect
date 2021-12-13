@@ -1,8 +1,8 @@
 import axios from 'axios'
-import { NProgress } from 'nprogress'
+import NProgress from 'nprogress'
 
 const clientAPI = axios.create({
-    baseURL: `api.teachersucenter.com/api/connect`,
+    baseURL: `https://api.teachersucenter.com/api`,
     withCredentials: false,
     headers: {
         Accept: "application/json",
@@ -24,7 +24,7 @@ export default{
     async get(link){
         return clientAPI.get(link);
     },
-    async post(link, body){
+    post(link, body){
         return clientAPI.post(link, body)
     },
     async delete(link, id){
