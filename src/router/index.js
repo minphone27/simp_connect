@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import store from "../store/index";
 
 import Login from "@/views/Login.vue";
 const routes = [
@@ -76,5 +77,6 @@ const router = createRouter({
 router.beforeEach((to, from) => {
   document.title = `${to.meta.title}`;
 })
+
 
 export default router;
