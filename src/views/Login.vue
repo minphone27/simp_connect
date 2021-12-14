@@ -1,32 +1,50 @@
 <template>
-    <div class="d-flex align-items-center justify-content-center">
-            <form action="" @submit.prevent="login()">
-                <div class="mb-3 row d-flex align-items-center justify-content-evenly">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Username</label>
-                    <div class="col-sm-10">
-                    <input type="text" v-model="username" class="form-control" id="staticEmail" placeholder="email">
-                    </div>
+    <div class="d-flex align-items-center justify-content-center text-light bg-primary" style="min-height:100vh">
+        <div class="containe form-container">
+            <div class="img-container">
+                <img src="@/assets/simplogo-white.png" alt="simpconnectlogo" class="img-fluid" />
+            </div>
+            <form @submit.prevent="login()" class="needs-validation" novalidate>
+                <div class="form-group my-3">
+                    <label for="username" class="form-label">User name</label>
+                    <input v-model="username" @blur="$v.username.$touch()" type="text" id="username" class="form-control" placeholder="Enter username" required/>
+                    <template v-if="v$.username.$error">
+                        <p v-if="v$.username.required" class="text-danger">Please enter username</p>
+                    </template>
                 </div>
-                <div class="mb-3 row d-flex justify-content-evenly align-items-center">
-                    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                    <div class="col-sm-10">
-                    <input type="password" v-model="password" class="form-control" id="inputPassword" placeholder="password">
-                    </div>
+                <div class="form-group my-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input v-model="password" @blur="$v.password.$touch()" type="password" id="password" class="form-control" placeholder="Enter Password" required/>
+                    <template v-if="v$.password.$error">
+                        <p v-if="v$.password.required" class="text-danger">Please enter password</p>
+                    </template>
                 </div>
-                <input type="submit">
+                <div class="form-group my-3">
+                    <input type="submit" class="btn btn-primary">
+                </div>
             </form>
+        </div>
     </div>
 </template>
 
 <script>
+import useValidate from "@vuelidate/core"
+import { required } from "@vuelidate/validators"
 import {mapActions, mapGetters, mapState} from 'vuex';
 import api from "../services/api"
 
 export default {
     data(){
         return{
+            v$: useValidate(), 
             username:'',
             password:''
+        }
+    },
+    validations(){
+        return{
+            username: { required },
+            password: { required }
         }
     },
     computed:{
@@ -39,11 +57,14 @@ export default {
         ...mapActions('auth',{
           actionLogin:'login'
         }),
-        login(){
+        async login(){
+            const isFormCorrect = await this.v$.$validate()
+            var form = document.querySelector(".needs-validation")
+            if (!isFormCorrect) return form.classList.add("was-validated");
             this.actionLogin({username:this.username, password:this.password})
             .then(()=> {
                 if(this.$store.state.auth.loginStatus == 'success'){
-                this.$router.push("/dashboard");
+                this.$router.push({name: "Home"});
                 }else if(this.$store.state.auth.loginStatus == 'failed'){
                     alert('failed to login')
                 }else{
@@ -64,5 +85,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.form-container{
+    background-color: rgba($color: #000000, $alpha: 0.2);
+    padding: 3rem 5rem;
+    border-radius: 20px;
 
+    position: relative;
+}
+
+.img-container{
+    width: 5rem;
+    height: 5rem;
+    background-color: inherit;
+    border-radius: 50%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+}
 </style>

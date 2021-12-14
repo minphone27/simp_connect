@@ -32,6 +32,10 @@
 import api from "@/services/api.js"
 export default {
     name: "Dashboard",
+    async mounted(){
+        const data = api.get(`/connect/works?work=147`)
+        console.log(data.data)
+    }
 }
 </script>
 

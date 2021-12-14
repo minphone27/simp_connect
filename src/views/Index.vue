@@ -2,11 +2,11 @@
   <div class="container-fluid d-flex flex-column justify-content-center align-items-center bg-dark py-5" style="min-height: 100vh">
     <h1 class="text-light">Your classes</h1>
     <div class="container-fluid d-flex flex-wrap flex-column flex-lg-row justify-content-around align-items-center">
-        <div v-for="(staff, index) in data" :key="index" @click="$router.push({name: 'Dashboard', params: { id: staff.work.id}})" 
+        <div v-for="(work, index) in data" :key="index" @click="$router.push({name: 'Dashboard', params: { id: work.id}})" 
             class="card mx-auto my-3 border-0 position-relative"  data-tilt>
             <img :src="require(`@/assets/${img_array[index]}`)" alt="abstract-img" class="card-img-top">
             <div class="card-body">
-                <h2 class="card-title h4">Class name: {{ staff.work.name }}</h2>
+                <h2 class="card-title h4">Class name: {{ work.work.name }}</h2>
             </div>
         </div>
     </div>
@@ -43,9 +43,9 @@ export default {
         }
     },
     async mounted(){
-        api.get(`/simpapi/staffworks?staff=${this.authData.userId}`)
+        api.get(`/simpapi/staff/${this.authData.userId}`)
             .then((res) => {
-                this.data = res.data
+                this.data = res.data.works;
                 console.log(this.data)
             })
             .then(() => {
@@ -95,5 +95,17 @@ export default {
     background-color: rgba($color: #000000, $alpha: 0.4);
     transform-style: preserve-3d;
     transform: translateZ(20px);
+
+    animation: intro 0.2s linear;
+}
+
+@keyframes intro {
+    from{
+        left: -100%;
+    }
+
+    to{
+        left: 0%;
+    }
 }
 </style>

@@ -27,6 +27,7 @@ export default {
 <style lang="scss">
 @import "../node_modules/bootstrap/scss/functions";
 // custom scss variables goes here
+$primary: #6733b0;
 
 @import "../node_modules/bootstrap/scss/variables";
 @import "../node_modules/bootstrap/scss/mixins";

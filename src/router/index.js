@@ -49,11 +49,18 @@ const routes = [
     meta: {title: "Form-responses"}
   },
   {
-    path: "/info",
-    name: "Info",
-    component: () => 
-      import("@/views/Info.vue"),
-    meta: {title: "Info"}
+    path: "/dashboard/student-detail/:id",
+    name: "StudentDetail",
+    component: () =>
+      import("@/views/StudentDetail.vue"),
+    meta: {title: "Student-Detail"}
+  },
+  {
+    path: "/dashboard/record-detail/:id",
+    name: "RecordDetail",
+    component: () =>
+      import("@/views/RecordDetail.vue"),
+    meta: {title: "Record-Detail"}
   },
   {
     path: "/:pathMatch(.*)*",
