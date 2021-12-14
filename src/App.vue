@@ -3,10 +3,24 @@
 </template>
 <script>
 import ContextMenu from "@/components/ContextMenu.vue"
+import { mapMutations } from "vuex"
 export default {
   name: 'App',
   components: {
     ContextMenu
+  },
+  methods: {
+    ...mapMutations("auth", [
+      "setAuthData"
+    ])
+  },
+  mounted(){
+    const data = {
+      token: localStorage.getItem("access"),
+      refreshToken: localStorage.getItem("refresh"),
+      userId: localStorage.getItem("userId")
+    }
+    this.setAuthData(data)
   }
 }
 </script>

@@ -28,7 +28,6 @@
       </table>
   </div>
 </template>
-
 <script>
 import api from "@/services/api.js"
 export default {
