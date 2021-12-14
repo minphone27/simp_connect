@@ -1,8 +1,8 @@
 import axios from 'axios'
-import { NProgress } from 'nprogress'
+import NProgress from 'nprogress'
 
 const clientAPI = axios.create({
-    baseURL: `api.teachersucenter.com/api/connect`,
+    baseURL: `https://api.teachersucenter.com/api/`,
     withCredentials: false,
     headers: {
         Accept: "application/json",
@@ -22,7 +22,7 @@ clientAPI.interceptors.response.use(config => {
 
 export default{
     async get(link){
-        return clientAPI.get(link);
+        return clientAPI.get(link)
     },
     async post(link, body){
         return clientAPI.post(link, body)
@@ -30,8 +30,7 @@ export default{
     async delete(link, id){
         return clientAPI.delete(`${link}/${id}`)
     },
-    async put(link, id){
+    async put(link, id, body){
         return clientAPI.put(`${link}/${id}`, body)
     }
 }
-

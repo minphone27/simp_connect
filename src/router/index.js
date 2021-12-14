@@ -5,7 +5,8 @@ const routes = [
   {
     path: "/login",
     name: "Login",
-    component: Login
+    component: Login,
+    meta: {title: "Login"}
   },
   {
     path: "/",
@@ -23,11 +24,32 @@ const routes = [
       meta: {title: "About"}
   },
   {
+    path: "/class",
+    name: "Classes",
+    component: () =>
+      import("@/views/Classes.vue"),
+    meta: {title: "Your classes"}
+  },
+  {
     path: "/dashboard",
     name: "Dashboard",
     component: () =>
       import(/* webpackChunkName: "about" */ "@/views/Dashboard.vue"),
     meta: {title: "Dashboard"}
+  },
+  {
+    path: "/form-responses",
+    name: "SimpConnect",
+    component: () => 
+      import("@/views/SimpConnect.vue"),
+    meta: {title: "Form-responses"}
+  },
+  {
+    path: "/info",
+    name: "Info",
+    component: () => 
+      import("@/views/Info.vue"),
+    meta: {title: "Info"}
   },
   {
     path: "/:pathMatch(.*)*",
@@ -36,8 +58,7 @@ const routes = [
     import(/* webpackChunkName: "NotFound" */ "@/views/NotFound.vue"),
     meta: {title: "Page not Found"}
   }
-
-];
+]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),

@@ -1,31 +1,40 @@
-<template>
+<template @contextmenu="showContextMenu">
   <router-view />
 </template>
-
+<script>
+import ContextMenu from "@/components/ContextMenu.vue"
+export default {
+  name: 'App',
+  components: {
+    ContextMenu
+  }
+}
+</script>
 <style lang="scss">
 @import "../node_modules/bootstrap/scss/functions";
 // custom scss variables goes here
 
 @import "../node_modules/bootstrap/scss/variables";
 @import "../node_modules/bootstrap/scss/mixins";
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+@import "~bootstrap/scss/bootstrap";
+
+html{
+  font-size: 100%;
 }
 
-#nav {
-  padding: 30px;
+body{
+  min-width: 100vw;
+  min-height: 100vh;
+  font-family: sans-serif;
+  padding: 0;
+  margin: 0;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+*{
+ box-sizing: border-box;
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+ &::before, &::after{
+   box-sizing: inherit;
+ }
 }
 </style>
