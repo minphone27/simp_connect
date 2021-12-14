@@ -21,14 +21,18 @@
         </div>
       </div>
       <table class="table table-responsive-sm">
-
+          <thead>
+              <th></th>
+              <th></th>
+          </thead>
       </table>
   </div>
 </template>
 
 <script>
+import api from "@/services/api.js"
 export default {
-    name: "Dashboard"
+    name: "Dashboard",
 }
 </script>
 

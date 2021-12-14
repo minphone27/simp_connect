@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
-import store from "../store/index";
-
 import Login from "@/views/Login.vue";
+
+
+
 const routes = [
   {
     path: "/login",
@@ -15,21 +16,30 @@ const routes = [
     alias: "/home",
     component: () => 
     import(/* webpackChunkName: "Home" */ "@/views/Index.vue"),
-    meta: {title: "Home"}
+    meta: {
+      requiredAuth:true,
+      title: "Home"
+    }
   },
   {
     path: "/about",
     name: "About",
     component: () =>
       import(/* webpackChunkName: "about" */ "@/views/About.vue"),
-      meta: {title: "About"}
+      meta: {
+        requiredAuth:true,
+        title: "About"
+      }
   },
   {
     path: "/dashboard",
     name: "Dashboard",
     component: () =>
       import(/* webpackChunkName: "about" */ "@/views/Dashboard.vue"),
-    meta: {title: "Dashboard"}
+    meta: {
+      requiredAuth:true,
+      title: "Dashboard"
+    }
   },
   {
     path: "/form-responses",
@@ -50,7 +60,9 @@ const routes = [
     name: "NotFound",
     component: () =>
     import(/* webpackChunkName: "NotFound" */ "@/views/NotFound.vue"),
-    meta: {title: "Page not Found"}
+    meta: {
+      title: "Page not Found"
+    }
   }
 ]
 
@@ -66,10 +78,6 @@ const router = createRouter({
     }
   },
 });
-
-router.beforeEach((to, from) => {
-  document.title = `${to.meta.title}`;
-})
 
 
 export default router;
