@@ -43,7 +43,7 @@ export default {
             this.actionLogin({username:this.username, password:this.password})
             .then(()=> {
                 if(this.$store.state.auth.loginStatus == 'success'){
-                this.$router.push("/dashboard");
+                this.$router.push({name:"Home"});
                 }else if(this.$store.state.auth.loginStatus == 'failed'){
                     alert('failed to login')
                 }else{

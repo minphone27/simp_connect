@@ -42,7 +42,7 @@ const routes = [
     }
   },
   {
-    path: "/form-responses",
+    path: "/form-responses/:id",
     name: "SimpConnect",
     component: () => 
       import("@/views/SimpConnect.vue"),

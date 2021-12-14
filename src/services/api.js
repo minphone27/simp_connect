@@ -43,7 +43,11 @@ clientAPI.interceptors.response.use(
             "https://api.teachersucenter.com/api/simpapi/refresh",
             payload
           );
-          await store.commit("auth/saveTokenData", response.data);
+          const data = {
+              access:response.data.access,
+              refresh:authData.refreshToken
+            }
+          await store.commit("auth/saveTokenData", data);
           error.config.headers[
             "Authorization"
           ] = `bearer ${response.data.access}`;
