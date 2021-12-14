@@ -20,6 +20,7 @@
 
 <script>
 import {mapActions, mapGetters, mapState} from 'vuex';
+import api from "../services/api"
 
 export default {
     data(){
@@ -49,9 +50,16 @@ export default {
                     alert(this.$store.state.auth.loginStatus)
                 }
             });
-            
+        },
+        getRefresh(){
+            api.post('/simpapi/refresh')
+            .then((response)=>{
+                console.log(response)
+            }).catch((err)=>{
+                console.log(err);
+            })
         }
-    }
+    },
 }
 </script>
 
