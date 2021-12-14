@@ -25,13 +25,6 @@ const routes = [
       meta: {title: "About"}
   },
   {
-    path: "/class",
-    name: "Classes",
-    component: () =>
-      import("@/views/Classes.vue"),
-    meta: {title: "Your classes"}
-  },
-  {
     path: "/dashboard",
     name: "Dashboard",
     component: () =>
