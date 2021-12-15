@@ -17,15 +17,11 @@ const getters = {
   },
   getAuthData(state){
     return state.authData;
-  },
+  }
 };
    
 const mutations = {
-    setAuthData(state, data){
-      state.authData = data;
-    },
     saveTokenData(state, data) {
-  
       localStorage.setItem("access", data.access);
       localStorage.setItem("refresh", data.refresh);
   
@@ -40,16 +36,17 @@ const mutations = {
     },
     setLoginStatu(state, value){
       state.loginStatus = value;
+    },
+    setToken(state,value){
+      state.authData.token = value;
     }
 };
    
 const actions = {
     login({ commit }, payload) {
-      
           return api
           .post("/simpapi/obtain", payload)
           .then((response)=>{
-            console.log(response.data)
             if(response.data) {
               commit("saveTokenData", response.data);
               commit("setLoginStatu", "success");

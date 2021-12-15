@@ -7,16 +7,16 @@
             <form @submit.prevent="login()" class="needs-validation" novalidate>
                 <div class="form-group my-3">
                     <label for="username" class="form-label">User name</label>
-                    <input v-model="username"  type="text" id="username" class="form-control" placeholder="Enter username" required/>
-                    <template >
-                        <p class="text-danger">Please enter username</p>
+                    <input v-model="username" @blur="v$.username.$touch()" type="text" id="username" class="form-control" placeholder="Enter username" required/>
+                    <template v-if="v$.username.$error">
+                        <p v-if="v$.username.required" class="text-danger">Please enter username</p>
                     </template>
                 </div>
                 <div class="form-group my-3">
                     <label for="password" class="form-label">Password</label>
-                    <input v-model="password"  type="password" id="password" class="form-control" placeholder="Enter Password" required/>
-                    <template >
-                        <p class="text-danger">Please enter password</p>
+                    <input v-model="password" @blur="v$.password.$touch()" type="password" id="password" class="form-control" placeholder="Enter Password" required/>
+                    <template v-if="v$.password.$error">
+                        <p v-if="v$.password.required" class="text-danger">Please enter password</p>
                     </template>
                 </div>
                 <div class="form-group my-3">
@@ -29,14 +29,14 @@
 
 <script>
 import useValidate from "@vuelidate/core"
-// import { required } from "@vuelidate/validators"
+import { required } from "@vuelidate/validators"
 import {mapActions, mapGetters, mapState} from 'vuex';
 import api from "../services/api"
 
 export default {
     data(){
         return{
-            // v$: useValidate(), 
+            v$: useValidate(), 
             username:'',
             password:''
         }
@@ -58,9 +58,9 @@ export default {
           actionLogin:'login'
         }),
         async login(){
-            // const isFormCorrect = await this.v$.$validate()
-            // var form = document.querySelector(".needs-validation")
-            // if (!isFormCorrect) return form.classList.add("was-validated");
+            const isFormCorrect = await this.v$.$validate()
+            var form = document.querySelector(".needs-validation")
+            if (!isFormCorrect) return form.classList.add("was-validated");
             this.actionLogin({username:this.username, password:this.password})
             .then(()=> {
                 if(this.$store.state.auth.loginStatus == 'success'){
@@ -72,6 +72,14 @@ export default {
                 }
             });
         },
+        getRefresh(){
+            api.post('/simpapi/refresh')
+            .then((response)=>{
+                console.log(response)
+            }).catch((err)=>{
+                console.log(err);
+            })
+        }
     },
 }
 </script>

@@ -3,6 +3,9 @@ import NProgress from 'nprogress'
 import store from '../store/index'
 
 let authToken = localStorage.getItem('access');
+if(authToken){
+    store.commit("auth/setToken", authToken);
+}
 
 const clientAPI = axios.create({
     baseURL: `https://api.teachersucenter.com/api`,
@@ -10,18 +13,17 @@ const clientAPI = axios.create({
     headers: {
         Accept: "application/json",
         "Content-type": "application/json",
-        Authorization: `Bearer ${authToken}`
     },
 })
 
 clientAPI.interceptors.request.use(config => {
     NProgress.start()
     const authData = store.getters["auth/getAuthData"];
-    if (authData == null) {
-      return config;
-    }
+    // if (authData == null) {
+    //   return config;
+    // }
   
-    config.headers.common["Authorization"] = `bearer ${authData.token}`;
+    config.headers.common["Authorization"] = `Bearer ${authData.token}`;
     return config;
 })
 
