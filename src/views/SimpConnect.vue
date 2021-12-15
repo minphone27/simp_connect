@@ -34,6 +34,15 @@ export default {
             this.students = res.data;
         })
     },
+    beforeRouteEnter(to, from, next) {
+        api.get(`/simpapi/staffworks?work=1`)
+        .then(()=>{
+            next()
+        })
+        .catch((err)=>{
+            return next({name:"Login"})
+        })
+    },
 }
 </script>
 <style scoped>

@@ -1,6 +1,5 @@
 import axios from 'axios'
 import NProgress from 'nprogress'
-import router from '../router';
 import store from '../store/index'
 
 let authToken = localStorage.getItem('access');
@@ -51,7 +50,6 @@ clientAPI.interceptors.response.use(
           error.config.headers[
             "Authorization"
           ] = `bearer ${response.data.access}`;
-
           return axios (error.config)
         } else {
           return Promise.reject(error);
@@ -59,17 +57,22 @@ clientAPI.interceptors.response.use(
       }
     );
 
+async function get(link){
+  return clientAPI.get(link)
+}
+
+async function post(link, body){
+  return clientAPI.post(link, body)
+}
+
+async function del(link, id){
+  return clientAPI.delete(`${link}/${id}`)
+}
+
+async function put(link, id, body){
+  return clientAPI.put(`${link}/${id}`, body)
+}
+
 export default{
-    async get(link){
-        return clientAPI.get(link)
-    },
-    post(link, body){
-        return clientAPI.post(link, body)
-    },
-    async delete(link, id){
-        return clientAPI.delete(`${link}/${id}`)
-    },
-    async put(link, id, body){
-        return clientAPI.put(`${link}/${id}`, body)
-    }
+  get, post, delete: del, put
 }

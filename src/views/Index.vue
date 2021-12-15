@@ -66,7 +66,16 @@ export default {
     },
     computed: {
         ...mapState(["authData"])
-    }
+    },
+    beforeRouteEnter(to, from, next) {
+        api.get(`/simpapi/staffworks?work=1`)
+        .then(()=>{
+            next()
+        })
+        .catch((err)=>{
+            return next({name:"Login"})
+        })
+    },
 }
 </script>
 

@@ -45,9 +45,11 @@ const mutations = {
    
 const actions = {
     login({ commit }, payload) {
+      
           return api
           .post("/simpapi/obtain", payload)
           .then((response)=>{
+            console.log(response.data)
             if(response.data) {
               commit("saveTokenData", response.data);
               commit("setLoginStatu", "success");
