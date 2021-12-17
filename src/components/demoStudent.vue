@@ -19,7 +19,7 @@
                             </thead>
                             <tbody id="tablebd"  v-for="e in students" :key="e.id">
                             
-                                <tr v-for="(i,index) in e.students" :key="index">
+                                <tr v-for="(i,index) in e.students" :key="index"  @dblclick="detail()">
                                     
                                     <td>{{ i.name }}</td>
                                     <td>{{ i.ename }}</td>
@@ -58,6 +58,11 @@
                     this.students = res.data.data;
                 })
         },
+        methods: {
+            detail() {
+                this.$router.push({name:'StudentDetail',params:{id:this.$route.params.id}})
+            }
+        },
     }
 </script>
 
@@ -69,17 +74,27 @@
             width: 100%;
             height: 500px;
             overflow-y: scroll;
+            overflow-x: scroll;
         }
-       /* Hide scrollbar for Chrome, Safari and Opera */
-            #scroll::-webkit-scrollbar {
-            display: none;
-            }
+               /* width */
+::-webkit-scrollbar {
+    width: 2px;
+}
 
-            /* Hide scrollbar for IE, Edge and Firefox */
-            #scroll {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-            }
+/* Track */
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
         .fl-table {
             border-radius: 10px;
             font-weight: normal;

@@ -18,19 +18,22 @@
           </div>
       </div>
       <div class="row">
-          <div class="col-6 col-md-3 my-2">
+          <div class="col-12 my-2">
 
                 
-                    
-                        <div>
-                            <span @click="activeTab = 'demoRecords'" class="fs-3 mx-2 text-light"  style="border-bottom:2px solid white;">records</span>
-                            <span @click="activeTab = 'demoStudent'" class="fs-3 mx-2 text-light"  style="border-bottom:2px solid white;">students</span>
-                        </div>
-                        
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a  @click="activeTab = 'demoRecords'" class="nav-link active" aria-current="page" href="#">Active</a>
+                        </li>
+                        <li class="nav-item">
+                            <a @click="activeTab = 'demoStudent'" class="nav-link" href="#">Link</a>
+                        </li>
+                    </ul>
+                    <component :is ="activeTab" />
             </div>
-            <div class="col-12">
+            <!-- <div class="col-12">
                 <component :is ="activeTab" />
-            </div>
+            </div> -->
       </div>
   </div>
 </template>

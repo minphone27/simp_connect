@@ -1,21 +1,23 @@
 <template>
-    <div class="container-fluid d-flex align-items-center" style="background: #6733b0;min-height:100vh;">
-        
-                <div id="scroll">
-                    <table id="table" class="fl-table table-responsive">
-                        <thead>
-                            <tr>
-                                <th v-for="(e,index) in students.header_row" :key="index">{{ e }}</th>
-                            </tr>
-                        </thead>
-                        <tbody  id="tablebd" >
-                            <tr v-for="(e,index) in students.data" :key="index">
-                                <td v-for="(i,index) in e" :key="index">{{ i }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+    <div class="container-fluid d-flex align-items-center justify-content-center " style="background: #6733b0;min-height:100vh;">
+       
+                <div class="row mx-auto">
+                        <div class="col-12">
+                            <table id="table" class="fl-table">
+                                <thead>
+                                    <tr>
+                                        <th v-for="(e,index) in students.header_row" :key="index">{{ e }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody  id="tablebd" >
+                                    <tr v-for="(e,index) in students.data" :key="index">
+                                        <td v-for="(i,index) in e" :key="index">{{ i }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                 </div>
-          
+                
     </div>
 </template>
 <script>
@@ -49,21 +51,30 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-  #scroll{
-            width: 100%;
+         .row{
             height: 500px;
             overflow-y: scroll;
+            overflow-x: scroll;
         }
-       /* Hide scrollbar for Chrome, Safari and Opera */
-            #scroll::-webkit-scrollbar {
-            display: none;
-            }
+          /* width */
+::-webkit-scrollbar {
+    width: 2px;
+}
 
-            /* Hide scrollbar for IE, Edge and Firefox */
-            #scroll {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-            }
+/* Track */
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
         .fl-table {
             border-radius: 10px;
             font-weight: normal;

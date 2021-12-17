@@ -4,9 +4,11 @@
           <div class="col-12 card-con">
               
                   <div  v-for="e in records" :key="e.id" class="d-flex justify-content-center align-items-center flex-wrap">
-                      <div v-for="(i,index) in e.records" :key="index" class="co-card d-flex align-items-center justify-content-center shadow">
-                          <span class="fs-4">{{ i.date }}</span>
-                      </div>
+                      <router-link :to="{name:'RecordDetail',params:{id:$route.params.id}}" v-for="(i,index) in e.records" :key="index" class="co-card d-flex align-items-center justify-content-center shadow text-dark">
+                          <div >
+                            <span class="fs-4">{{ i.date }}</span>
+                        </div>
+                      </router-link>
                   </div>
               
           </div>
