@@ -19,7 +19,7 @@
                             </thead>
                             <tbody id="tablebd"  v-for="e in students" :key="e.id">
                             
-                                <tr v-for="(i,index) in e.students" :key="index"  @dblclick="detail()">
+                                <tr v-for="(i,index) in e.students" :key="index"  @dblclick="detail(i.id)">
                                     
                                     <td>{{ i.name }}</td>
                                     <td>{{ i.ename }}</td>
@@ -59,8 +59,8 @@
                 })
         },
         methods: {
-            detail() {
-                this.$router.push({name:'StudentDetail',params:{id:this.$route.params.id}})
+            detail(id) {
+                this.$router.push({name:'StudentDetail',params:{id}})
             }
         },
     }

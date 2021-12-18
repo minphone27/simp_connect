@@ -56,7 +56,7 @@ const routes = [
     meta: {title: "Student-Detail"}
   },
   {
-    path: "/dashboard/record-detail/:id",
+    path: "/dashboard/record-detail/:id/:date",
     name: "RecordDetail",
     component: () =>
       import("@/views/RecordDetail.vue"),

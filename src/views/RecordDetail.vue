@@ -27,10 +27,9 @@ export default {
     },
     mounted(){
         this.loading = true;
-        api.get(`/connect/records/${this.$route.params.id}`)
+        api.get(`/connect/records?date=${this.$route.params.date}&work=${this.$route.params.id}`)
             .then((response)=>{
-                let data = response.data.sturecs;
-                console.log(data)
+                let data = response.data.data[0].sturecs;                
                 data = data.map((el)=>{
                     return {
                         id: el.id,
